@@ -107,7 +107,7 @@ upstreamed to Scenic's shared libraries.
 You will need Python 3.9 or later. Download the code from GitHub
 
 ```shell
-$ git clone https://github.com/google-research/scenic.git
+$ git clone https://github.com/doitintl/scenic.git
 $ cd scenic
 $ pip install .
 ```
