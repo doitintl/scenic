@@ -239,6 +239,6 @@ Proceed with the steps detailed [here](https://github.com/google-research/scenic
 ```shell
 $ python scenic/main.py --config=scenic/projects/baselines/configs/mnist/mnist_config.py --workdir=./
 ```
-
+Check the GPU utilization in Cloud Monitoring by looking for the `custom/instance/gpu/utilization` metric under the VM Instance resource.
 
 _Disclaimer: This is not an official Google product._
