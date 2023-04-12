@@ -217,7 +217,7 @@ $ nvidia-smi
 $ cat /usr/local/cuda/include/cudnn_version.h | grep CUDNN_MAJOR -A 2
 $ nvcc --version
 ```
-Install the GPU monitoring agent (per instructions [here](https://cloud.google.com/compute/docs/gpus/monitor-gpus#reporting-script)
+Install the GPU monitoring agent (per instructions [here](https://cloud.google.com/compute/docs/gpus/monitor-gpus#reporting-script))
 ```shell
 $ sudo mkdir -p /opt/google
 $ cd /opt/google
