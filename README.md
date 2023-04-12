@@ -233,11 +233,11 @@ $ sudo systemctl --no-reload --now enable /lib/systemd/system/google_gpu_monitor
 ```
 Install a GPU-supported, pre-installed CUDA version of JAX as described [here](https://github.com/google/jax#pip-installation-gpu-cuda-installed-locally-harder) 
 ```shell
-pip install "jax[cuda11_cudnn82]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+$ pip install "jax[cuda11_cudnn82]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 ```
 Proceed with the steps detailed [here](https://github.com/google-research/scenic#quickstart) to install packages. Run the MNIST example by running the command
 ```shell
-python scenic/main.py --config=scenic/projects/baselines/configs/mnist/mnist_config.py --workdir=./
+$ python scenic/main.py --config=scenic/projects/baselines/configs/mnist/mnist_config.py --workdir=./
 ```
 
 
