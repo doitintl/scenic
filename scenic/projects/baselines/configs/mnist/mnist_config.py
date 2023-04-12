@@ -34,13 +34,13 @@ def get_config():
   config.l2_decay_factor = .0005
   config.max_grad_norm = None
   config.label_smoothing = None
-  config.num_training_epochs = 10
+  config.num_training_epochs = 1000
   config.batch_size = 128
   config.rng_seed = 0
   # Logging.
   config.write_summary = True
   config.xprof = True  # Profile using xprof.
-  config.checkpoint = True  # Do checkpointing.
+  config.checkpoint = False  # Do checkpointing.
   config.debug_train = False  # Debug mode during training.
   config.debug_eval = False  # Debug mode during eval.
   return config
