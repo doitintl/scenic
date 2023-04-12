@@ -197,4 +197,48 @@ Here is an example BibTeX entry:
 }
 ```
 
+### Set up for training multiple A100 GPUs on Google Cloud
+First, set up an A100 deep learning notebook on Vertex Workbench
+```shell
+$ PROJECT=[PROJECT_ID]
+$ VM_NAME=[INSTANCE_NAME]
+$ ZONE=[ZONE]
+
+
+$ gcloud notebooks instances create $VM_NAME \
+	--vm-image-project=deeplearning-platform-release --vm-image-family=common-cu113-notebooks-debian-11-py310 \
+	--machine-type=a2-highgpu-2g --accelerator-type=NVIDIA_TESLA_A100 --accelerator-core-count=2 --install-gpu-driver \
+	--location=$ZONE \
+	--boot-disk-size=100 --boot-disk-type=PD_BALANCED
+```
+Check Nvidia driver and CUDA version
+```shell
+$ nvidia-smi
+$ cat /usr/local/cuda/include/cudnn_version.h | grep CUDNN_MAJOR -A 2
+$ nvcc --version
+```
+Install the GPU monitoring agent (per instructions [here](https://cloud.google.com/compute/docs/gpus/monitor-gpus#reporting-script)
+```shell
+$ sudo mkdir -p /opt/google
+$ cd /opt/google
+$ sudo git clone https://github.com/GoogleCloudPlatform/compute-gpu-monitoring.git
+$ cd /opt/google/compute-gpu-monitoring/linux
+$ sudo apt-get install python3-venv
+$ sudo python3 -m venv venv
+$ sudo venv/bin/pip install wheel
+$ sudo venv/bin/pip install -Ur requirements.txt
+$ sudo cp /opt/google/compute-gpu-monitoring/linux/systemd/google_gpu_monitoring_agent_venv.service /lib/systemd/system
+$ sudo systemctl daemon-reload
+$ sudo systemctl --no-reload --now enable /lib/systemd/system/google_gpu_monitoring_agent_venv.service
+```
+Install a GPU-supported, pre-installed CUDA version of JAX as described [here](https://github.com/google/jax#pip-installation-gpu-cuda-installed-locally-harder) 
+```shell
+pip install "jax[cuda11_cudnn82]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+```
+Proceed with the steps detailed [here](https://github.com/google-research/scenic#quickstart) to install packages. Run the MNIST example by running the command
+```shell
+python scenic/main.py --config=scenic/projects/baselines/configs/mnist/mnist_config.py --workdir=./
+```
+
+
 _Disclaimer: This is not an official Google product._
