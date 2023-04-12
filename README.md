@@ -230,6 +230,7 @@ $ sudo venv/bin/pip install -Ur requirements.txt
 $ sudo cp /opt/google/compute-gpu-monitoring/linux/systemd/google_gpu_monitoring_agent_venv.service /lib/systemd/system
 $ sudo systemctl daemon-reload
 $ sudo systemctl --no-reload --now enable /lib/systemd/system/google_gpu_monitoring_agent_venv.service
+$ cd
 ```
 Install a GPU-supported, pre-installed CUDA version of JAX as described [here](https://github.com/google/jax#pip-installation-gpu-cuda-installed-locally-harder) 
 ```shell
